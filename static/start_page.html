@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>CNL Test</title>
+<!-- ブラウザにこのページをキャッシュさせないことで、戻るボタンで戻ってきたときに onload が走るようにしようとしてみます。 -->
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+</head>
+<script src="/jquery-2.1.0.min.js"></script>
+<link href="/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+<script>
+// 単にlogを取らせます
+function Log(msg){
+    $.ajax({url: "https://localhost:8888/" + msg,
+	    type: "GET"});
+}
+// URLを log に取らせて、そのURLにページ遷移します
+function LogAndMove(url){
+    $.ajax({url: "https://localhost:8888/" + url,
+	    type: "GET"}).done(function(){
+	       document.location = url;
+	    }).fail(function(){
+	       document.location = url;
+	    });
+}
+</script>
+<!-- onunload を未定義にすると戻ってきた時に onload が呼び出されるという噂を聞いたのでやってみる
+http://d.hatena.ne.jp/hiratara/20080308/1204955060
+-->
+<body onload="Log('top_page');" onunload="">
+<div class="col-md-12">
+  &nbsp;
+  <p><button class="btn btn-default"
+	      onClick="LogAndMove('http://signin-ebay.com/ws/eBayISAPI.dll?SellItem');">Website 1</button>
+  <p><button class="btn btn-default"
+	      onClick="LogAndMove('https://signin.ebay.com/ws/eBayISAPI.dll?SellItem');">Website 2</button>
+  <p><button class="btn btn-default"
+	      onClick="LogAndMove('https://www.smbc-card.com/mem/top/');">Website 3</button>
+  <p><button class="btn btn-default"
+	      onClick="LogAndMove('http://www.smbc-card.com.mem.top.index.jsp.etkinbocekilaclama.com/mem/top/');">Website 4</button>
+</div>
+</body>
+</html>

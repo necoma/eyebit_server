@@ -1,0 +1,10 @@
+{
+    "fixation": {
+	"max distance": 50
+	, "min msec": 800
+    }
+    , "targets": [
+	{ "name": "Target1", "x": 0, "y": 100, "width": 500, "height": 50 }
+	, { "name": "Target2", "x": 500, "y": 100, "width": 500, "height": 50 }
+    ]
+}
